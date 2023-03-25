@@ -2,11 +2,12 @@ import React, { useState ,useEffect} from 'react'
 
 import SingleCharacter from './SingleCharacter'
 import axios from 'axios'
-
+import Skeleton from './Skeleton'
 export default function Disney() {
     const [characters, setcharacters] = useState([])
 const [search, setsearch] = useState("") 
 const [order, setorder] = useState("ASC")
+const [loading, setloading] = useState(true)
 const [filtered, setfiltered] = useState([])
     useEffect(() => {
         console.log('calw');
@@ -19,6 +20,7 @@ const {data}=await axios.get('https://api.disneyapi.dev/characters')
 setcharacters(data.data);
 
 setfiltered(data.data)
+setloading(false)
 console.log(filtered);
     }
     
@@ -95,13 +97,21 @@ console.log(filtered);
     <button className='px-4 py-2 text-white bg-blue-500 flex justify-center mx-24' onClick={sortitaesc}>sort Aesc</button></div>
     <div className='border border-gray-400 flex flex-wrap rounded-md m-6 p-6 '>
 
-
-{filtered?.map((item)=>{
+{loading ?  <div className="flex flex-wrap">
+            <div className="flex flex-wrap  ">
+              {Array(15)
+                .fill("")
+                .map((item, index) => {
+                  return <Skeleton key={index} />;
+                })}
+            </div>
+          </div>:filtered?.map((item)=>{
 return(
 <SingleCharacter name={item?.name} image={item?.imageUrl} key={item._id} tv={item?.tvShows} video={item?.videoGames}/>
 )
 
 })}
+
 
 
     </div>
