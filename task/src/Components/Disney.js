@@ -6,35 +6,73 @@ import axios from 'axios'
 export default function Disney() {
     const [characters, setcharacters] = useState([])
 const [search, setsearch] = useState("") 
+const [order, setorder] = useState("ASC")
 const [filtered, setfiltered] = useState([])
     useEffect(() => {
+        console.log('calw');
     getdata()
     }, []);
 
     const getdata=async()=>{
 const {data}=await axios.get('https://api.disneyapi.dev/characters')
-console.log(data);
+
 setcharacters(data.data);
 
 setfiltered(data.data)
+console.log(filtered);
     }
-    function compare(a,b) {
-       
-            if(a.name>b.name){return 1;}
-
-            else{
-                return -1;
-            }
-            
-        
-    }
+    
 
     const sortit=()=>{
-let newarray =characters?.sort(compare)
+       
+let newarray =[...filtered].sort(function(a,b) {
+       
+    let fa = a.name.toLowerCase(),
+    fb = b.name.toLowerCase();
+    
+
+    if (fa < fb) {
+        return 1;
+    }
+    if (fa > fb) {
+        return -1;
+    }
+    return 0;
+    
+
+
+
+})
+
 setfiltered(newarray);
+console.log(filtered);
+
 
     }
-
+    const sortitaesc=()=>{
+       
+        let newarray =[...filtered].sort(function(a,b) {
+               
+            let fa = a.name.toLowerCase(),
+            fb = b.name.toLowerCase();
+            
+        
+            if (fa < fb) {
+                return -1;
+            }
+            if (fa > fb) {
+                return 1;
+            }
+            return 0;
+        
+        
+        })
+        
+        setfiltered(newarray);
+        //console.log(filtered);
+        
+        
+            }
     const onsearch=()=>{
 
         if (search == '') {
@@ -42,7 +80,7 @@ setfiltered(newarray);
         }
        
         let filter=characters?.filter((item)=> item?.name.toLowerCase().includes(search.toLowerCase()))
-              console.log(filter);
+        //console.log(filter);
         setfiltered(filter);
         //setcharacters(filtered)
     }
@@ -53,7 +91,8 @@ setfiltered(newarray);
 
 <div className='flex justify-center'> <input type="search" onChange={(e)=>{setsearch(e.target.value)}} placeholder="search" className='px-4 py-2 w-1/2 border border-blue-400'/>
     <button className='px-4 py-2 text-white bg-blue-500' onClick={onsearch} >search</button></div>
-    <button className='px-4 py-2 text-white bg-blue-500 flex justify-center mx-24' onClick={sortit} >sort</button>
+<div className='flex mt-2'>    <button className='px-4 py-2 text-white bg-blue-500 flex justify-center mx-24' onClick={sortit} >sort Desc</button>
+    <button className='px-4 py-2 text-white bg-blue-500 flex justify-center mx-24' onClick={sortitaesc}>sort Aesc</button></div>
     <div className='border border-gray-400 flex flex-wrap rounded-md m-6 p-6 '>
 
 
