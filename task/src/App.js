@@ -1,8 +1,12 @@
 import Form from './Components/Form'
+import Disney from './Components/Disney';
+
+
 function App() {
   return (
     <div className="App">
-    <Form/>
+    
+ <Disney/>
      
     </div>
   );
