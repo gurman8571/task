@@ -18,17 +18,17 @@ export default function SingleCharacter({name,image,tv,video}) {
         </h1>
         <p className="leading-relaxed mb-3">
         <span className='px-4 font-bold'>Tv shows:</span> {
-tv.length>0?tv?.map((item,i)=>{return(<>
+tv.length>0?tv?.map((item,i)=>{return(
 <span  className='' key={i}>{item} {i+1 !== tv.length? ',':''}</span>
-</>)})
+)})
 
 :<span className=''> no shows</span>}
         </p>
         <p className="leading-relaxed mb-3">
         <span className='px-4 font-bold'>Video games:</span> {
-video.length>0?video?.map((item,i)=>{return(<>
+video.length>0?video?.map((item,i)=>{return(
 <span  className='' key={i}>{item} {i+1 !== video.length? ',':''} </span>
-</>)})
+)})
 
 :<span className=''> no Game</span>}
         </p>

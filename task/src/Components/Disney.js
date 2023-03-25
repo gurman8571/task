@@ -31,7 +31,7 @@ setfiltered(data.data)
 
     const sortit=()=>{
 let newarray =characters?.sort(compare)
-console.log(newarray);
+setfiltered(newarray);
 
     }
 
@@ -58,9 +58,9 @@ console.log(newarray);
 
 
 {filtered?.map((item)=>{
-return(<>
+return(
 <SingleCharacter name={item?.name} image={item?.imageUrl} key={item._id} tv={item?.tvShows} video={item?.videoGames}/>
-</>)
+)
 
 })}
 
