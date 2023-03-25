@@ -17,10 +17,8 @@ alert("All feilds are mandatory");
 }
 
 
-
-
 const data=await axios.get(`https://test-api-v3.myways.ai/user?email=${email}`)
-if (data.status === 404) {
+if (data.status === 200) {
     alert("Success user found")
 } else {
 await axios.post(`https://test-api-v3.myways.ai/user`,{
