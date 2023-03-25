@@ -16,12 +16,13 @@ if (!email || !phone || !name) {
 alert("All feilds are mandatory");    
 }
 
-
-const data=await axios.get(`https://test-api-v3.myways.ai/user?email=${email}`)
-if (data.status === 200) {
-    alert("Success user found")
-} else {
-await axios.post(`https://test-api-v3.myways.ai/user`,{
+try {
+    const data=await axios.get(`https://test-api-v3.myways.ai/user?email=${email}`)
+    if (data.status === 200) {
+        alert("Success user found")
+    }
+} catch (error) {
+    await axios.post(`https://test-api-v3.myways.ai/user`,{
 name:name,
 email:email,
 phone:phone,
@@ -29,6 +30,11 @@ phone:phone,
  })
  alert("user created");
 }
+
+
+
+
+
 
 
  /*
