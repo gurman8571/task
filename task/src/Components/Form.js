@@ -18,20 +18,19 @@ alert("All feilds are mandatory");
 
 
 
-try {
-    const data=await axios.get(`https://test-api-v3.myways.ai/user?email=${email}`)   
-    alert("user created");
-} catch (error) {
-    await axios.post(`https://test-api-v3.myways.ai/user`,{
+
+const data=await axios.get(`https://test-api-v3.myways.ai/user?email=${email}`)
+if (data.status === 404) {
+    alert("Success user found")
+} else {
+await axios.post(`https://test-api-v3.myways.ai/user`,{
 name:name,
 email:email,
 phone:phone,
 
  })
-
+ alert("user created");
 }
-
-
 
 
  /*
